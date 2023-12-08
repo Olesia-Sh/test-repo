@@ -5,7 +5,7 @@ from main import Shop
 
 class TestMysql(unittest.TestCase):
   def setUp(self):
-      self.mysqlclass = Shop("192.168.88.15", "seller", "abc123", "shop3") #створює екземпляр нашого класу
+      self.mysqlclass = Shop("192.168.88.15", "seller", "abc123")
       print("Connected!!!!!!!!!!")
   def test_create_item(self):
       self.mysqlclass.create_shop()
