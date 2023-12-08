@@ -9,9 +9,9 @@ class Shop(Mysql):
         self.run_query(query)
         query = "USE shop3"
         self.run_query(query)
-        query = "CREATE TABLE shop3 (id INT AUTO_INCREMENT PRIMARY KEY, item VARCHAR(255), price INT)"
+        query = "CREATE TABLE shop4 (id INT AUTO_INCREMENT PRIMARY KEY, item VARCHAR(255), price INT)"
         self.run_query(query)
-        print("Shop3 table created.")
+        print("Shop4 table created.")
 
     def add_item(self, item, price):
         query = f"INSERT INTO shop3 (item, price) VALUES ('{item}', {price})"
@@ -35,8 +35,8 @@ password="abc123"
 
 myshop = Shop(host, user, password)
 myshop.connect_db()
-myshop.create_shop()
+#myshop.create_shop()
 myshop.add_item("Tomato", 5)
 myshop.add_item("Lemon", 3)
 myshop.delete_item("Lemon")
-myshop.delete_shop()
+#myshop.delete_shop()
