@@ -25,9 +25,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: downcase REPO
-      run: |
-        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}    
+    
     
     - name: Extract metadata (tags, labels) for Docker
       id: meta
@@ -41,9 +39,13 @@ jobs:
       with:
          github_token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: downcase REPO
+      run: |
+        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}     
+
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
         push: true
         #tags: mysql-conn:latest
-        tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}
