@@ -9,13 +9,21 @@ class TestMysql(unittest.TestCase):
       print("Connected!!!!!!!!!!")
   def test_create_item(self):
       self.mysqlclass.create_shop()
-      res = self.mysqlclass.add_item("Tomato", 5)
+      self.mysqlclass.add_item("Tomato", 5)
+      query = f"SELECT * FROM shop6"
+      res = self.mysqlclass.run_query(query)
       print(f"Res: {res}")
       expected = [(1, 'Tomato', 5)]
+      self.mysqlclass.delete_shop()
       self.assertEqual(expected, res)
 
-  def drop_table(self):
-      self.mysqlclass.delete_shop()
+
+
+
+
+
+  #def drop_table(self):
+   #   self.mysqlclass.delete_shop()
 
 
 
