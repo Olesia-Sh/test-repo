@@ -1,6 +1,4 @@
-name: Build
-
-on: 
+on:
   push:
     branches: [main]
 
@@ -17,7 +15,7 @@ jobs:
       packages: write
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Log in to the Container registry
       uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
       with:
@@ -25,8 +23,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    
-    
+
+
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
@@ -41,7 +39,7 @@ jobs:
 
     - name: downcase REPO
       run: |
-        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}     
+        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
     - name: Build image
       uses: docker/build-push-action@v5
@@ -61,10 +59,10 @@ jobs:
 
     - name: Build
       run: python3 -m unittest discover test
-    - if: ${{ success() }}    
+    - if: ${{ success() }}
       name: Push image
       uses: docker/build-push-action@v5
       with:
         push: true
         #tags: mysql-conn:latest
-        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, latest 
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, latest
