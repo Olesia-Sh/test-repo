@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 import unittest
-from main import Shop
+from src.main import Shop
 
 
 class TestMysql(unittest.TestCase):
   def setUp(self):
-      self.mysqlclass = Shop("192.168.88.15", "root", "abc123")
+      self.mysqlclass = Shop("mysql", "root", "abc123")
       print("Connected!!!!!!!!!!")
   def test_create_item(self):
       self.mysqlclass.create_shop()
