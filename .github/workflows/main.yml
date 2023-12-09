@@ -60,10 +60,13 @@ jobs:
         tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
 
     - name: Run tests
-      run: docker compose up
+      id: run-tests 
+      run: | 
+          docker compose up
+          echo "Exit Code: $?"
        
     - name: Push image
-      if: ${{success()}}
+      if: success() && ${{ steps.run-tests.outputs.result == 'success' }}
       uses: docker/build-push-action@v5
       with:
        push: true
