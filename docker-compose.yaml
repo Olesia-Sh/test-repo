@@ -17,7 +17,7 @@ services:
 
   app:
     # tty: true
-    # image: ghcr.io/romangrekov/testrepo:tests
+    image: ghcr.io/romangrekov/testrepo:tests
     build:
       context: .
       dockerfile: Dockerfile_tests
