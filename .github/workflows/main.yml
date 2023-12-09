@@ -61,13 +61,13 @@ jobs:
 
     - name: Run tests
       id: run-tests 
-      run: docker compose up
+      run: docker compose up --exit-code-from app
           
           
        
     - name: Push image
-      if: ${{ steps.run-tests.outputs.result == 'success' }}
       uses: docker/build-push-action@v5
+      if: success()
       with:
        push: true
        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }} 
