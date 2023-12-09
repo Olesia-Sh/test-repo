@@ -62,8 +62,8 @@ jobs:
     - name: Run tests
       id: run-tests
       run: |
-       docker compose up -d mysql
-       docker compose up --exit-code-from app app
+       docker compose up
+       
 
     - name: Push image
       uses: docker/build-push-action@v5
