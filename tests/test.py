@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import unittest
-from src.main import Shop
+from main import Shop
 
 
 class TestMysql(unittest.TestCase):
