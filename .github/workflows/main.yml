@@ -58,10 +58,13 @@ jobs:
         push: false
         
         tags: ${{ env.REGISTRY }}/${{ env.REPO }}:tests
-    - if: ${{ success() }}
+
+    - name: Run tests
+      run: python3 -m unittest discover test
+    - if: ${{ success() }}    
       name: Push image
       uses: docker/build-push-action@v5
       with:
         push: true
         
-        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, latest
