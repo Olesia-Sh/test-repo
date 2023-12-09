@@ -43,9 +43,28 @@ jobs:
       run: |
         echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}     
 
-    - name: Build and push
+    - name: Build image
+      uses: docker/build-push-action@v5
+      with:
+        push: false
+        #tags: mysql-conn:latest
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, latest
+        #labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Build image with tests
+      uses: docker/build-push-action@v5
+      with:
+        file: Dockerfile_tests
+        push: false
+        #tags: mysql-conn:latest
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}-tests, latest
+
+    - name: Build
+      run: python3 -m unittest discover test
+    - if: ${{ success() }}    
+      name: Push image
       uses: docker/build-push-action@v5
       with:
         push: true
         #tags: mysql-conn:latest
-        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}
+        tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ steps.tag_version.outputs.new_tag }}, latest 

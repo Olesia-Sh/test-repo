@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123
+    ports:
+      - '3306:3306'
+
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "mysql"]
+      timeout: 20s
+      retries: 10
+
+
+
+  app:
+    # tty: true
+    # image: ghcr.io/romangrekov/testrepo:tests
+    build:
+      context: .
+      dockerfile: Dockerfile_tests
+    depends_on:
+       mysql:
+           condition: service_healthy    
+
+  # app-coverage:
+  #   tty: true
+  #   image: ghcr.io/romangrekov/testrepo:tests
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile_tests
+  #   entrypoint: bash -c "python3 -m coverage run -m unittest && python3 -m coverage html"
+  #   volumes:
+  #     - ./coverage:/workdir/htmlcov
