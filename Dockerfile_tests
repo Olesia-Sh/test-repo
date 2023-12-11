@@ -1,6 +1,6 @@
 FROM ghcr.io/olesia-sh/test-repo:latest
 
-#RUN pip3 install coverage
+RUN pip3 install coverage
 
 COPY tests /workdir
 
