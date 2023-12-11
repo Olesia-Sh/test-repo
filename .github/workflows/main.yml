@@ -75,7 +75,7 @@ jobs:
     - name: Test coverage
       run: |
         mkdir coverage
-        docker compose up -coverage
+        docker compose up app-coverage
         rm -rf coverage/.gitignore
 
     - name: push coverage
