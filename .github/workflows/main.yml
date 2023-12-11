@@ -85,7 +85,7 @@ jobs:
         author_email: olesias897@gmail.com
         message: 'Add code coverage report'
         add: 'coverage'
-        pull: '-r'
+        pull: '-ff'
         push: true
 
     - name: Deploy to GitHub Pages
