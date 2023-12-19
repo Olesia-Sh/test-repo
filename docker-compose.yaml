@@ -17,7 +17,7 @@ services:
 
   # app:
   #   # tty: true
-  #   image: ghcr.io/romangrekov/testrepo:tests
+  #   image: 
   #   build:
   #     context: .
   #     dockerfile: Dockerfile_tests
@@ -27,7 +27,7 @@ services:
 
   coverage:
      #tty: true
-     image: ghcr.io/romangrekov/testrepo:tests
+     image: ghcr.io/olesia-sh/test-repo:tests
      build:
        context: .
        dockerfile: Dockerfile_tests
