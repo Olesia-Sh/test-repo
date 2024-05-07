@@ -11,9 +11,9 @@ services:
 
 
 
-      app:
+    app:
       # tty: true
-    image: 
+    
       build:
       context: .
       dockerfile: Dockerfile_tests
@@ -23,7 +23,7 @@ services:
 
     coverage:
      #tty: true
-     image: ghcr.io/olesia-sh/test-repo:tests
+     
      build:
        context: .
        dockerfile: Dockerfile_tests
