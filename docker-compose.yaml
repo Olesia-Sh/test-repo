@@ -17,10 +17,13 @@ services:
     app:
       # tty: true
     
-      build: .
+      build: 
+        context: .
      
-      dockerfile: Dockerfile_tests
-    
+        dockerfile: Dockerfile_tests
+        depends_on:
+          - mysql
+        condition: service_healthy    
 
     coverage:
      #tty: true
