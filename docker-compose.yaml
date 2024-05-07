@@ -14,8 +14,8 @@ services:
     app:
       # tty: true
     
-      build:
-      context: .
+      build: .
+     
       dockerfile: Dockerfile_tests
       depends_on:
        - mysql
